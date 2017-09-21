@@ -5,14 +5,7 @@ import java.util.Scanner;
 public class Controller {
     private Model model;
     private View view;
-
     Scanner in = new Scanner(System.in);
-    int minValue = 0;
-    int maxValue = 100;
-    int attemptCount = 0;
-    int a = 0;
-    int b = 100;
-    boolean result = false;
 
     public Controller(Model model, View view) {
         this.model = model;
@@ -21,7 +14,7 @@ public class Controller {
 
     public void guessingSecretNumber() {
 
-        int random_number = a + (int) (Math.random() * b);
+        int random_number = model.a + (int) (Math.random() * model.b);
         //System.out.println(random_number);
 
         System.out.println(View.INPUT);
@@ -29,33 +22,33 @@ public class Controller {
         do {
             int guess = in.nextInt();
 
-            if (guess >= minValue && guess <= maxValue) {
+            if (guess >= model.minValue && guess <= model.maxValue) {
 
                 if (guess > random_number) {
-                    maxValue = guess;
-                    attemptCount++;
+                    model.maxValue = guess;
+                    model.attemptCount++;
                     System.out.println(View.WRONG_LESS);
-                    System.out.println(View.INPUT_IN_RANGE + minValue + View.TO + maxValue);
+                    System.out.println(View.INPUT_IN_RANGE + model.minValue + View.TO + model.maxValue);
                 }
                 if (guess < random_number) {
-                    minValue = guess;
-                    attemptCount++;
+                    model.minValue = guess;
+                    model.attemptCount++;
                     System.out.println(View.WRONG_MORE);
-                    System.out.println(View.NEW_RANGE + minValue + View.TO + maxValue);
+                    System.out.println(View.NEW_RANGE + model.minValue + View.TO + model.maxValue);
                 }
                 if (guess == random_number) {
-                    attemptCount++;
-                    result = true;
+                    model.attemptCount++;
+                    model.result = true;
                     System.out.println(View.SUCCESS + guess);
                 }
             }
-            if (guess < minValue || guess > maxValue) {
-                System.out.println(View.INPUT_IN_RANGE + minValue + " - " + maxValue);
-                attemptCount++;
+            if (guess < model.minValue || guess > model.maxValue) {
+                System.out.println(View.INPUT_IN_RANGE + model.minValue + View.TO + model.maxValue);
+                model.attemptCount++;
             }
 
-        } while (!result);
+        } while (!model.result);
 
-        System.out.println(View.WIN + attemptCount + View.STEPS);
+        System.out.println(View.WIN + model.attemptCount + View.STEPS);
     }
 }

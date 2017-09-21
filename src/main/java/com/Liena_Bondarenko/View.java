@@ -1,8 +1,5 @@
 package com.Liena_Bondarenko;
 
-/**
- * Created by Liena_Bondarenko on 9/21/2017.
- */
 public class View {
     public static final String WRONG_LESS = "No. The secret number is less. Try again";
     public static final String INPUT = "Please, input you number";
