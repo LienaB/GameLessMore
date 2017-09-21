@@ -1,11 +1,13 @@
 package com.Liena_Bondarenko;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Controller {
     private Model model;
     private View view;
     Scanner in = new Scanner(System.in);
+    ArrayList guessesList = new ArrayList();
 
     public Controller(Model model, View view) {
         this.model = model;
@@ -21,6 +23,7 @@ public class Controller {
 
         do {
             int guess = in.nextInt();
+            guessesList.add(guess);
 
             if (guess >= model.minValue && guess <= model.maxValue) {
 
@@ -50,5 +53,6 @@ public class Controller {
         } while (!model.result);
 
         System.out.println(View.WIN + model.attemptCount + View.STEPS);
+        System.out.println(View.GUESSES_LIST + guessesList);
     }
 }

@@ -1,5 +1,7 @@
 package com.Liena_Bondarenko;
 
+import java.util.ArrayList;
+
 public class View {
     public static final String WRONG_LESS = "No. The secret number is less. Try again";
     public static final String INPUT = "Please, input you number";
@@ -10,4 +12,5 @@ public class View {
     public static final String INPUT_IN_RANGE = "Please input the number in a range from ";
     public static final String WIN = "You win for ";
     public static final String STEPS = " steps!";
+    public static final String GUESSES_LIST = "Your guess try were ";
 }
