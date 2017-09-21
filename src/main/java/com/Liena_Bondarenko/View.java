@@ -12,5 +12,5 @@ public class View {
     public static final String INPUT_IN_RANGE = "Please input the number in a range from ";
     public static final String WIN = "You win for ";
     public static final String STEPS = " steps!";
-    public static final String GUESSES_LIST = "Your guess try were ";
+    public static final String GUESSES_LIST = "Your attempts to guess were ";
 }
