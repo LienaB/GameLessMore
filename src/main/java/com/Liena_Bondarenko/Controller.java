@@ -1,13 +1,14 @@
 package com.Liena_Bondarenko;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Controller {
+    private Scanner in;
     private Model model;
     private View view;
-    Scanner in = new Scanner(System.in);
-    ArrayList guessesList = new ArrayList();
+    private ArrayList guessesList = new ArrayList();
 
     public Controller(Model model, View view) {
         this.model = model;
@@ -16,14 +17,21 @@ public class Controller {
 
     public void guessingSecretNumber() {
 
-        int random_number = model.a + (int) (Math.random() * model.b);
+        int random_number = (int) (Math.random() * model.maxValue);
+        int guess = model.minValue - 1;
         //System.out.println(random_number);
 
         System.out.println(View.INPUT);
 
         do {
-            int guess = in.nextInt();
-            guessesList.add(guess);
+            in = new Scanner(System.in);
+            try {
+                guess = in.nextInt();
+                guessesList.add(guess);
+            }
+            catch (InputMismatchException e) {
+                System.out.println(view.EXEPTION_MESSAGE);
+            }
 
             if (guess >= model.minValue && guess <= model.maxValue) {
 
@@ -41,7 +49,6 @@ public class Controller {
                 }
                 if (guess == random_number) {
                     model.attemptCount++;
-                    model.result = true;
                     System.out.println(View.SUCCESS + guess);
                 }
             }
@@ -50,7 +57,7 @@ public class Controller {
                 model.attemptCount++;
             }
 
-        } while (!model.result);
+        } while (guess != random_number);
 
         System.out.println(View.WIN + model.attemptCount + View.STEPS);
         System.out.println(View.GUESSES_LIST + guessesList);
